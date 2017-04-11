@@ -2,8 +2,6 @@ package com.movilidadescolar.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,20 +10,31 @@ import javax.persistence.Table;
 public class State {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@Column(name = "id", length = 2)
+	private String id;
 	
-	@Column(name = "name")
+	@Column(name = "name", nullable = false, length = 50)
 	private String name;
 	
-	@Column(name = "order_number")
+	@Column(name = "order_number", nullable = false)
 	private Integer orderNumber;
+	
+	@Column(name = "at_work", nullable = false)
+	private boolean atWork;
 
-	public Long getId() {
+	public boolean isAtWork() {
+		return atWork;
+	}
+
+	public void setAtWork(boolean atWork) {
+		this.atWork = atWork;
+	}
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -49,8 +58,10 @@ public class State {
 		// Will be use by JPA
 	}
 	
-	public State(String name, Integer orderNumber){
+	public State(String id, String name, Integer orderNumber, boolean atWork){
+		this.id = id;
 		this.name = name;
 		this.orderNumber = orderNumber;
+		this.atWork = atWork;
 	}
 }
