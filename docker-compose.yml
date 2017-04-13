@@ -1,0 +1,12 @@
+PostgreSQL:
+  image: postgres
+  ports:
+    - "5432:5432"
+  environment:  
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASS=postgres
+    - POSTGRES_DB=movescodb
+    - PGDATA=/var/lib/postgresql/data/pgdata
+  volumes:
+    - ./docker/pgdata:/var/lib/postgres/data/pgdata
+  
