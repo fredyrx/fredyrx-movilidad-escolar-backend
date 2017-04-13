@@ -17,7 +17,7 @@ public class UserController {
 	
 	@RequestMapping("/save")
 	public String process(){		
-		repository.save(new User("pepito3@mailinator.com","pass","pepito","dos cañones"));
+		repository.save(new User("pepito3@mailinator.com","pass","pepito","dos caÃ±ones"));
 		return "Done";
 	}
 	
