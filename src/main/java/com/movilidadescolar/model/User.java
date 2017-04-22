@@ -10,6 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Users")
@@ -34,9 +39,11 @@ public class User implements Serializable {
 	@Column(name = "active")
 	private Boolean active;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "create_at")
 	private Date createdAt;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "alter_at")
 	private Date alterAt;
 	
