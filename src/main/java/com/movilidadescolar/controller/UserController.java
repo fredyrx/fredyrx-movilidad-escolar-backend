@@ -3,7 +3,9 @@ package com.movilidadescolar.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +13,7 @@ import com.movilidadescolar.model.User;
 import com.movilidadescolar.repo.UserRepository;
 
 @RestController
+@RequestMapping("api/users")
 public class UserController {
 	@Autowired
 	UserRepository repository;
@@ -21,7 +24,7 @@ public class UserController {
 		return "Done";
 	}
 	
-	@RequestMapping("/findall")
+	@RequestMapping(method = RequestMethod.GET)
 	public List<User> findAll(){
 		List<User> result;
 		result = repository.findAll();
@@ -29,10 +32,8 @@ public class UserController {
 		return result;
 	}
 	
-	@RequestMapping("/findbyid")
-	public String findById(@RequestParam("id") long id){
-		String result = "";
-		/*result = repository.findOne(id).toString();
-		*/return result;
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	public User findById(@PathVariable Integer id){
+		return repository.findById(id);
 	}
 }

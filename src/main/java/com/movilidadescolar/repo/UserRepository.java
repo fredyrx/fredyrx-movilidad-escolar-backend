@@ -11,5 +11,6 @@ import com.movilidadescolar.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	List<User> findByName(String name);
 	User findByEmailAndPasswordHash(String email, String password);
+	User findById(Integer id);
 	//User save(User user);
 }
