@@ -22,9 +22,10 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 	
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@Column(name = "password_hash")
 	private String passwordHash;
 	
