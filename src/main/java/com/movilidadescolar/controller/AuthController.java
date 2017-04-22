@@ -49,11 +49,11 @@ public class AuthController {
 		public void setMessage(String message) {
 			this.message = message;
 		}
-		public Response(Object data) {
+		public Response(Object data, String message) {
 			this.data = data;
 			this.error = "";
 			this.status = 200;
-			this.message = "";
+			this.message = message;
 		}
 		
 		protected Response(){
@@ -65,7 +65,7 @@ public class AuthController {
 	@RequestMapping(method = RequestMethod.POST, value = "/auth")
 	public Response authenticate(@RequestBody Login login){
 		User user = userRepo.findByEmailAndPasswordHash(login.getUsername(), login.getPassword());
-		Response response = new Response(user);
+		Response response = new Response(user, "User sign in successfully");
 		if (response.getData() == null) {
 			response.setError("Not Found");
 			response.setMessage("Email y/o password incorrecto(s)");
@@ -77,7 +77,7 @@ public class AuthController {
 	public Response signUp(@RequestBody User user)
 	{
 		User userCreated = userRepo.save(user);
-		Response response = new Response(userCreated);
+		Response response = new Response(userCreated, "User signup successfully");
 		return response;
 	}
 }
