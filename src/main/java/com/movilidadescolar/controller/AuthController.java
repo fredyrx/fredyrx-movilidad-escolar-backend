@@ -11,7 +11,7 @@ import com.movilidadescolar.model.User;
 import com.movilidadescolar.repo.UserRepository;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api")
 public class AuthController {
 	
 	@Autowired
@@ -62,7 +62,7 @@ public class AuthController {
 		
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, value = "/auth")
 	public Response authenticate(@RequestBody Login login){
 		User user = userRepo.findByEmailAndPasswordHash(login.getUsername(), login.getPassword());
 		Response response = new Response(user);
@@ -70,6 +70,14 @@ public class AuthController {
 			response.setError("Not Found");
 			response.setMessage("Email y/o password incorrecto(s)");
 		}
+		return response;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/signup")
+	public Response signUp(@RequestBody User user)
+	{
+		User userCreated = userRepo.save(user);
+		Response response = new Response(userCreated);
 		return response;
 	}
 }
