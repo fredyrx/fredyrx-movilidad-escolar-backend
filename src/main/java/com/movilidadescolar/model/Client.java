@@ -77,6 +77,8 @@ public class Client implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+		this.name = user.getName();
+		this.lastName = user.getLastName();
 	}
 
 	public String getName() {
