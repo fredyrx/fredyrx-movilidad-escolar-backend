@@ -41,12 +41,4 @@ public class UserController {
 	public User findById(@PathVariable Integer id){
 		return repository.findById(id);
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/{user_id}/client")
-	public Client setClientForUser(@PathVariable Integer user_id, @RequestBody Client client){
-		User user = repository.findById(user_id);
-		client.setUser(user);
-		Client clientSaved = clientRepo.save(client);
-		return clientSaved;
-	}
 }

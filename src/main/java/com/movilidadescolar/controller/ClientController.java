@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.movilidadescolar.model.Client;
+import com.movilidadescolar.model.Dependent;
+import com.movilidadescolar.model.User;
 import com.movilidadescolar.repo.ClientRepository;
 
 @RestController
@@ -33,6 +35,14 @@ public class ClientController {
 	@RequestMapping(method = RequestMethod.POST)
 	public Client setClient(@RequestBody Client client){
 		return repository.save(client);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/{client_id}/dependant")
+	public Dependent setDependentForClient(@PathVariable Long client_id, @RequestBody Dependent dependent){
+		Client client = repository.findById(client_id);
+		//dependent.setClient(client);
+		//dependentRepo.save(dependent);
+		return dependent;
 	}
 	
 		
