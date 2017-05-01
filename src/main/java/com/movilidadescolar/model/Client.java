@@ -45,7 +45,7 @@ public class Client implements Serializable{
 	//@OneToMany(fetch = FetchType.EAGER)
 	//@OneToMany(mappedBy = "Dependent", cascade = CascadeType.ALL)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "client",fetch = FetchType.EAGER)
-    private List<Dependent> roles = new ArrayList<>();
+    private List<Dependent> dependant = new ArrayList<>();
 
 	
 	protected Client(){}
@@ -120,8 +120,16 @@ public class Client implements Serializable{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+
+	public List<Dependent> getDependant() {
+		return dependant;
+	}
+
+
+	public void setDependant(List<Dependent> dependant) {
+		this.dependant = dependant;
+	}
 	
-
-
 	
 }

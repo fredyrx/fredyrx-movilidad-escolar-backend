@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import javax.persistence.JoinColumn;
 
 @SuppressWarnings("serial")
@@ -23,6 +26,7 @@ public class Dependent implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
 	private Client client;
@@ -77,14 +81,6 @@ public class Dependent implements Serializable{
 		this.photoUri = photo;
 	}
 
-	public Date getBorn() {
-		return birthday;
-	}
-
-	public void setBorn(Date born) {
-		this.birthday = born;
-	}
-
 	public String getHomeAddress() {
 		return homeAddress;
 	}
@@ -107,6 +103,22 @@ public class Dependent implements Serializable{
 
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 	public Dependent(Integer id, String name, String lastName, String photo, Date born, String homeAddress,
