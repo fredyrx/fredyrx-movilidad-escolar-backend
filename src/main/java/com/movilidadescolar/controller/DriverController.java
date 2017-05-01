@@ -9,41 +9,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.movilidadescolar.model.Client;
-import com.movilidadescolar.model.Dependent;
-import com.movilidadescolar.repo.ClientRepository;
+import com.movilidadescolar.model.Driver;
+import com.movilidadescolar.repo.DriverRepository;
 
 @RestController
-@RequestMapping("/api/clients")
-public class ClientController {
+@RequestMapping("/api/drivers")
+public class DriverController {
 
 	@Autowired
-	ClientRepository repository;
+	DriverRepository repository;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Client> getClients(){
+	public List<Driver> getClients(){
 		return repository.findAll();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
-	public Client getClientById(@PathVariable Integer id){
+	public Driver getClientById(@PathVariable Integer id){
 		return repository.findById(id);
 	}
 	
 	// Necesita registrar user como campo de client
 	@RequestMapping(method = RequestMethod.POST)
-	public Client setClient(@RequestBody Client client){
+	public Driver setClient(@RequestBody Driver client){
 		return repository.save(client);
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, value = "/{client_id}/dependant")
-	public Dependent setDependentForClient(@PathVariable Integer client_id, @RequestBody Dependent dependent){
-		Client client = repository.findById(client_id);
-		//dependent.setClient(client);
-		//dependentRepo.save(dependent);
-		return dependent;
-	}
-	
-		
-	
 }

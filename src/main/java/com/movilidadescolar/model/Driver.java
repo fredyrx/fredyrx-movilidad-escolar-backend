@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "drivers")
@@ -16,21 +19,24 @@ public class Driver implements Serializable{
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Integer id;
 	
 	private String name;
 	
-	@Column(name = "last_name")
+	@Column(name = "last_name",nullable = false)
 	private String lastName;
 	
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@Column(name = "password", nullable = false)
 	private String password;
 	
 	@Column(name = "phone_number")
 	private String phoneNumber;
 	
-	@Column(name = "license_id")
+	@Column(name = "license_id", nullable = false, unique = true)
 	private String licenseId;
 	
 	@Column(name = "car_model")
@@ -38,11 +44,11 @@ public class Driver implements Serializable{
 	
 	protected Driver(){}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -102,7 +108,7 @@ public class Driver implements Serializable{
 		this.carModel = carModel;
 	}
 
-	public Driver(Long id, String name, String lastName, String email, String password, String phoneNumber,
+	public Driver(Integer id, String name, String lastName, String email, String password, String phoneNumber,
 			String licenseId, String carModel) {
 		this.id = id;
 		this.name = name;

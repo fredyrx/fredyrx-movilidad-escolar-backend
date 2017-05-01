@@ -5,10 +5,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import javax.persistence.JoinColumn;
 
 @SuppressWarnings("serial")
 @Entity
@@ -17,16 +21,21 @@ public class Dependent implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Integer id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+	private Client client;
 	
 	private String name;
 	
 	@Column(name = "last_name")
 	private String lastName;
 	
-	private String photo;
+	@Column(name = "photo_uri")
+	private String photoUri;
 	
-	private Date born;
+	private Date birthday;
 	
 	@Column(name = "home_address")
 	private String homeAddress;
@@ -36,11 +45,11 @@ public class Dependent implements Serializable{
 	
 	protected Dependent(){}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -60,20 +69,20 @@ public class Dependent implements Serializable{
 		this.lastName = lastName;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getPhotoUri() {
+		return photoUri;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setPhotoUri(String photo) {
+		this.photoUri = photo;
 	}
 
 	public Date getBorn() {
-		return born;
+		return birthday;
 	}
 
 	public void setBorn(Date born) {
-		this.born = born;
+		this.birthday = born;
 	}
 
 	public String getHomeAddress() {
@@ -100,13 +109,13 @@ public class Dependent implements Serializable{
 		this.longitude = longitude;
 	}
 
-	public Dependent(Long id, String name, String lastName, String photo, Date born, String homeAddress,
+	public Dependent(Integer id, String name, String lastName, String photo, Date born, String homeAddress,
 			Double latitude, Double longitude) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
-		this.photo = photo;
-		this.born = born;
+		this.photoUri = photo;
+		this.birthday = born;
 		this.homeAddress = homeAddress;
 		this.latitude = latitude;
 		this.longitude = longitude;
