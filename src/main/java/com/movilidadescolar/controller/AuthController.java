@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.movilidadescolar.model.Client;
 import com.movilidadescolar.model.Driver;
 import com.movilidadescolar.model.Login;
-import com.movilidadescolar.model.User;
 import com.movilidadescolar.repo.ClientRepository;
 import com.movilidadescolar.repo.DriverRepository;
-import com.movilidadescolar.repo.UserRepository;
 
 @RestController
 @RequestMapping("/api/auth")

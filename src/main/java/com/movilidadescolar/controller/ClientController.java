@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.movilidadescolar.model.Client;
 import com.movilidadescolar.model.Dependent;
-import com.movilidadescolar.model.User;
 import com.movilidadescolar.repo.ClientRepository;
 
 @RestController
