@@ -13,7 +13,7 @@ import com.movilidadescolar.model.School;
 import com.movilidadescolar.repo.SchoolRepository;
 
 @RestController
-@RequestMapping("/schools")
+@RequestMapping("/api/schools")
 public class SchoolController {
 
 	@Autowired

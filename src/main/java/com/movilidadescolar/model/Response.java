@@ -37,6 +37,9 @@ public class Response{
 		this.error = "";
 		this.status = 200;
 		this.message = message;
+		if (data == null){
+			this.setError("Not Found");
+		}
 	}
 	
 	protected Response(){

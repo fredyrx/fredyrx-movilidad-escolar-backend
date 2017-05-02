@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.movilidadescolar.model.Client;
 import com.movilidadescolar.model.Dependent;
+import com.movilidadescolar.model.Response;
 import com.movilidadescolar.repo.ClientRepository;
 import com.movilidadescolar.repo.DependentRepository;
 
@@ -37,8 +38,10 @@ public class ClientController {
 	
 	// Necesita registrar user como campo de client
 	@RequestMapping(method = RequestMethod.POST)
-	public Client setClient(@RequestBody Client client){
-		return repository.save(client);
+	public Response setClient(@RequestBody Client client){
+		Client clientRegistered = repository.save(client);
+		Response res = new Response(clientRegistered,"Client Sign Up ok");
+		return res;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/{client_id}/dependant")
