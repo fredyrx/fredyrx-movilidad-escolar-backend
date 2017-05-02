@@ -34,4 +34,10 @@ public class DriverController {
 	public Driver setClient(@RequestBody Driver client){
 		return repository.save(client);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/{school_id}/schools")
+	public List<Driver> getClientsBySchools(@PathVariable Long school_id){
+		return repository.findBySchoolDriversSchoolId(school_id);
+	}
+
 }

@@ -1,12 +1,15 @@
 package com.movilidadescolar.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,10 +27,10 @@ public class School {
 	private String address;
 	
 	@Column(name = "latitude")
-	private Float latitude;
+	private Double latitude;
 	
 	@Column(name = "longitude")
-	private Float longitude;
+	private Double longitude;
 	
 	@Column(name = "logo")
 	private String logo;
@@ -35,12 +38,18 @@ public class School {
 	@Column(name = "active")
 	private boolean active;
 	
-	@Column(name = "created_at")
-	private Date createdAt;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
+	List<SchoolDriver> schoolDrivers;
 	
-	@Column(name = "altered_at")
-	private Date altereddAt;
 	
+	public List<SchoolDriver> getSchoolDrivers() {
+		return schoolDrivers;
+	}
+
+	public void setSchoolDrivers(List<SchoolDriver> schoolDrivers) {
+		this.schoolDrivers = schoolDrivers;
+	}
+
 	protected School(){
 		
 	}
@@ -73,19 +82,19 @@ public class School {
 		this.address = address;
 	}
 
-	public Float getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Float latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
 
-	public Float getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Float longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
@@ -105,20 +114,5 @@ public class School {
 		this.active = active;
 	}
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getAltereddAt() {
-		return altereddAt;
-	}
-
-	public void setAltereddAt(Date altereddAt) {
-		this.altereddAt = altereddAt;
-	}
 	
 }

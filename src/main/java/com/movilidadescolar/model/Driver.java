@@ -1,12 +1,15 @@
 package com.movilidadescolar.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -42,6 +45,17 @@ public class Driver implements Serializable{
 	@Column(name = "car_model")
 	private String carModel;
 	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "driver")
+	List<SchoolDriver> schoolDrivers;
+	
+	public List<SchoolDriver> getSchoolDrivers() {
+		return schoolDrivers;
+	}
+
+	public void setSchoolDrivers(List<SchoolDriver> schoolDrivers) {
+		this.schoolDrivers = schoolDrivers;
+	}
+
 	protected Driver(){}
 
 	public Integer getId() {
