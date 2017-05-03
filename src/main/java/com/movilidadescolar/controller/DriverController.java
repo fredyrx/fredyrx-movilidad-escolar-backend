@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.movilidadescolar.model.Driver;
+import com.movilidadescolar.model.Response;
+import com.movilidadescolar.repo.DependentRepository;
 import com.movilidadescolar.repo.DriverRepository;
 
 @RestController
@@ -18,6 +20,10 @@ public class DriverController {
 
 	@Autowired
 	DriverRepository repository;
+	
+	@Autowired
+	DependentRepository dependentRepo;
+
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Driver> getClients(){
@@ -38,6 +44,11 @@ public class DriverController {
 	@RequestMapping(method = RequestMethod.GET, value="/{school_id}/schools")
 	public List<Driver> getClientsBySchools(@PathVariable Long school_id){
 		return repository.findBySchoolDriversSchoolId(school_id);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/{driver_id}/dependant")
+	public Response listDependantForDriver(@PathVariable int driver_id){
+		return new Response(dependentRepo.findByContranctsDriverId(driver_id),"ok");
 	}
 
 }

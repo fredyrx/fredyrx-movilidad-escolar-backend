@@ -8,5 +8,5 @@ import com.movilidadescolar.model.Dependent;
 
 public interface DependentRepository extends JpaRepository<Dependent,Long> {
 	Dependent findById(Integer id);
-	List<Dependent> findByClient(Integer client_id);
+	List<Dependent> findByContranctsDriverId(int driver_id);
 }

@@ -2,6 +2,7 @@ package com.movilidadescolar.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -45,17 +47,13 @@ public class Driver implements Serializable{
 	@Column(name = "car_model")
 	private String carModel;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "driver")
-	List<SchoolDriver> schoolDrivers;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "driver")
+	private List<SchoolDriver> schoolDrivers;
 	
-	public List<SchoolDriver> getSchoolDrivers() {
-		return schoolDrivers;
-	}
-
-	public void setSchoolDrivers(List<SchoolDriver> schoolDrivers) {
-		this.schoolDrivers = schoolDrivers;
-	}
-
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "driver")
+	private List<Contract> contrancts;
+	
 	protected Driver(){}
 
 	public Integer getId() {
@@ -120,6 +118,23 @@ public class Driver implements Serializable{
 
 	public void setCarModel(String carModel) {
 		this.carModel = carModel;
+	}
+	
+
+	public List<SchoolDriver> getSchoolDrivers() {
+		return schoolDrivers;
+	}
+
+	public void setSchoolDrivers(List<SchoolDriver> schoolDrivers) {
+		this.schoolDrivers = schoolDrivers;
+	}
+	
+	public List<Contract> getContrancts() {
+		return contrancts;
+	}
+
+	public void setContrancts(List<Contract> contrancts) {
+		this.contrancts = contrancts;
 	}
 
 	public Driver(Integer id, String name, String lastName, String email, String password, String phoneNumber,
