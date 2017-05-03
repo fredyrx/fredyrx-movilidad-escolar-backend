@@ -55,11 +55,11 @@ public class ClientController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/{client_id}/dependant")
-	public Dependent setDependentForClient(@PathVariable Integer client_id, @RequestBody Dependent dependent){
+	public Response setDependentForClient(@PathVariable Integer client_id, @RequestBody Dependent dependent){
 		Client client = repository.findById(client_id);
 		dependent.setClient(client);
-		dependentRepo.save(dependent);
-		return dependent;
+		Dependent dependentCreated = dependentRepo.save(dependent);
+		return new Response(dependentCreated,"Se guardó correctamente.");
 	}
 	
 		
