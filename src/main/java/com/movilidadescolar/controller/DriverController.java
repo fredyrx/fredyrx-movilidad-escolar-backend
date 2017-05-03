@@ -37,8 +37,8 @@ public class DriverController {
 	
 	// Necesita registrar user como campo de client
 	@RequestMapping(method = RequestMethod.POST)
-	public Driver setClient(@RequestBody Driver client){
-		return repository.save(client);
+	public Response setClient(@RequestBody Driver client){
+		return new Response(repository.save(client),"signUp OK");
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/{school_id}/schools")
